@@ -16,6 +16,10 @@ app.get("/",(req,res)=>{
 const articleRoutes = require("./routes/articleRoutes");
 app.use("/api/articles", articleRoutes);
 
+const scrapeRoutes = require("./routes/scraperoutes");
+app.use("/api/scrape", scrapeRoutes);
+
+
 // Connect to MongoDB
 const connectDB=require("./config/db");
 connectDB();

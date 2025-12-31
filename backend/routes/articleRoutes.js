@@ -20,4 +20,28 @@ router.get("/",async(req,res)=>{
         res.status(500).json({error:err.message});
     }
 });
+// Update article
+router.put("/:id", async (req, res) => {
+  try {
+    const updated = await Article.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    res.json(updated);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+// Delete article
+router.delete("/:id", async (req, res) => {
+  try {
+    await Article.findByIdAndDelete(req.params.id);
+    res.json({ message: "Article deleted" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 module.exports=router;
