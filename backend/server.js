@@ -29,3 +29,11 @@ app.listen(process.env.PORT,()=>{
     console.log(`server is running on port ${PORT}`);
 });
 
+const cron = require("node-cron");
+const { exec } = require("child_process");
+
+// midnight
+cron.schedule("0 0 * * *", () => {
+  console.log("⏰ Running scheduled scrape job...");
+  exec("node jobs/scrapeJob.js");
+});

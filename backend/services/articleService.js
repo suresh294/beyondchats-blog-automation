@@ -1,21 +1,24 @@
 const Article = require("../models/Article");
-const scrapeBeyondChats = require("../scrapers/beyonchatsScraper");
 
-async function scrapeAndSaveArticles() {
-  const articles = await scrapeBeyondChats();
+async function saveNewArticles(scrapedArticles) {
+  let inserted = 0;
 
-  for (const article of articles) {
-    const exists = await Article.findOne({
-      sourceurl: article.sourceurl
+  for (const item of scrapedArticles) {
+    const exists = await Article.findOne({ sourceUrl: item.sourceUrl });
+
+    if (exists) continue;
+
+    await Article.create({
+      title: item.title,
+      sourceUrl: item.sourceUrl,
+      content: item.content || "Content will be scraped later",
+      isUpdated: false
     });
 
-    if (!exists) {
-      await Article.create(article);
-      console.log("Saved:", article.title);
-    } else {
-      console.log("Skipped duplicate:", article.title);
-    }
+    inserted++;
   }
+
+  return inserted;
 }
 
-module.exports = scrapeAndSaveArticles;
+module.exports = { saveNewArticles };
