@@ -22,7 +22,7 @@ async function scrapeBeyondChats() {
   ) {
     articles.push({
       title,
-      sourceUrl: link.startsWith("http")
+      sourceurl: link.startsWith("http")
         ? link
         : `https://beyondchats.com${link}`,
       content: "Content will be scraped later"

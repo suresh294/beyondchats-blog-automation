@@ -6,7 +6,7 @@ async function scrapeAndSaveArticles() {
 
   for (const article of articles) {
     const exists = await Article.findOne({
-      sourceUrl: article.sourceUrl
+      sourceurl: article.sourceurl
     });
 
     if (!exists) {

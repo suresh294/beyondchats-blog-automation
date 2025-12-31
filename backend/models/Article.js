@@ -10,7 +10,8 @@ const articlescehema=new mongoose.Schema(
             required:true
         },
         sourceurl:{
-            type:String
+            type:String,
+            required:true
         },
         isUpdated:{
             type:Boolean,
