@@ -4,13 +4,12 @@ async function saveNewArticles(scrapedArticles) {
   let inserted = 0;
 
   for (const item of scrapedArticles) {
-    const exists = await Article.findOne({ sourceUrl: item.sourceUrl });
-
+    const exists = await Article.findOne({ sourceurl: item.sourceurl });
     if (exists) continue;
 
     await Article.create({
       title: item.title,
-      sourceUrl: item.sourceUrl,
+      sourceurl: item.sourceurl,
       content: item.content || "Content will be scraped later",
       isUpdated: false
     });
