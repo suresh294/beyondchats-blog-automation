@@ -1,14 +1,22 @@
 const express = require("express");
-const scrapeAndSaveArticles = require("../services/articleService");
+const scrapeBeyondChats = require("../scrapers/beyondchatsScraper");
+const { saveNewArticles } = require("../services/articleService");
 
 const router = express.Router();
 
 router.post("/", async (req, res) => {
   try {
-    await scrapeAndSaveArticles();
-    res.json({ message: "Scraping completed successfully" });
+    const articles = await scrapeBeyondChats();
+    const inserted = await saveNewArticles(articles);
+
+    return res.json({
+      message: "Scraping completed",
+      scraped: articles.length,
+      inserted
+    });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error("Manual scrape failed:", error.message);
+    return res.status(500).json({ error: "Scraping failed" });
   }
 });
 
