@@ -1,5 +1,7 @@
 # BeyondChats Blog Automation
 
+[![CI](https://github.com/suresh294/beyondchats-blog-automation/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/suresh294/beyondchats-blog-automation/actions/workflows/ci.yml)
+
 A Node.js and React practice project for scraping article links from the BeyondChats blog, saving new article records in MongoDB, and exposing article CRUD endpoints through Express.
 
 > **Deployment status:** A verified public deployment URL has not been confirmed. This repository should be treated as a local prototype, not as a production publishing service.
